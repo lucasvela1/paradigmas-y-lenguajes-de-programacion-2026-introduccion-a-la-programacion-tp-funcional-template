@@ -26,7 +26,7 @@
  *          calcularConImpuesto(99.99, 10) === 109.99
  */
 export function calcularConImpuesto(base: number, tasa: number): number {
-  throw new Error("No implementado");
+  return Math.round(base * (1 + tasa / 100) * 100) / 100;
 }
 
 /**
@@ -41,7 +41,9 @@ export function agruparPorParidad(nums: number[]): {
   pares: number[];
   impares: number[];
 } {
-  throw new Error("No implementado");
+  const pares= nums.filter(n => n % 2 === 0);
+  const impares= nums.filter(n => n% 2 !== 0 );
+  return {pares, impares};
 }
 
 /**
@@ -54,7 +56,13 @@ export function agruparPorParidad(nums: number[]): {
  * Ejemplo: fibonacci(10) === 55
  */
 export function fibonacci(n: number): number {
-  throw new Error("No implementado");
+  if (n===0){
+    return 0;
+  }else if (n===1){
+    return 1;
+  } else{
+  return (fibonacci(n-1)+fibonacci(n-2));
+  }
 }
 
 /**
@@ -75,7 +83,16 @@ export function validarContrasena(pass: string): {
   valida: boolean;
   errores: string[];
 } {
-  throw new Error("No implementado");
+  const e1=  pass.length <8 ? [("muy corta (menos de 8 caracteres")]: [];
+  const e2=  !/[A-Z]/.test(pass) ? [("sin mayúsculas")]: [];
+  const e3=  !/\d/.test(pass) ?  [("sin dígitos")]: [];
+
+  const errores = ([]as string[]).concat(e1,e2,e3);
+
+  return {
+    valida: errores.length ===0,
+    errores: errores
+  };
 }
 
 /**
@@ -91,8 +108,17 @@ export function componerNombre(
   apellido: string,
   titulo?: string
 ): string {
-  throw new Error("No implementado");
+  return titulo 
+    ? `${titulo} ${nombre} ${apellido}` 
+    : `${nombre} ${apellido}`;
 }
+/*const nombre_completo: String = ""
+  if (titulo){
+    return nombre_completo.concat(titulo," ",nombre," ",apellido)
+  } else{
+    return nombre_completo.concat(nombre," ",apellido)
+  };Esta solución no cumplía por usar el String */ 
+
 
 // ─── GRUPO 2: Inmutabilidad ───────────────────────────────────────────────
 
