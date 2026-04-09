@@ -154,7 +154,11 @@
    (mi-filter pos? [-1 0 1 2])   => (1 2)
    (mi-filter even? [])          => ()"
   [pred coll]
-  (throw (ex-info "No implementado" {:fn "mi-filter"})))
+  (if (empty? coll)
+    ()
+    (if (pred (first coll)) 
+      (cons (first coll) (mi-filter pred (rest coll)))
+      (mi-filter pred (rest coll)))))
 
 (defn componer
   "CLJ-14: Composición de dos funciones.
