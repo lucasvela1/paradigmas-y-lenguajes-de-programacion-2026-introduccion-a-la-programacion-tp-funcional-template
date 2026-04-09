@@ -130,7 +130,8 @@ export function componerNombre(
  *          El array original NO debe cambiar.
  */
 export function agregarElemento<T>(arr: readonly T[], elemento: T): T[] {
-  throw new Error("No implementado");
+  const agregado = [...arr,elemento];
+  return agregado;
 }
 
 /**
@@ -142,7 +143,12 @@ export function agregarElemento<T>(arr: readonly T[], elemento: T): T[] {
  *          eliminarPorIndice([10,20,30], 99)   → [10,20,30]
  */
 export function eliminarPorIndice<T>(arr: readonly T[], indice: number): T[] {
-  throw new Error("No implementado");
+  if (indice < 0 || indice >= arr.length) {
+    return [...arr]; //Se retorna copia porque por función pura no se puede retornar el mismo
+  }
+  else{
+    return arr.filter((_, i) => i !== indice);//Con filter se pueden pasar dos elementos, el elemento en sí (no importa ahora, y el indice, que si interesa)
+  } //En el nuevo arreglo son todos los que NO concuerdan con el indice
 }
 
 /**
@@ -158,7 +164,9 @@ export function actualizarPrecio(
   producto: { nombre: string; precio: number; [key: string]: unknown },
   nuevoPrecio: number
 ): { nombre: string; precio: number; [key: string]: unknown } {
-  throw new Error("No implementado");
+  /*const nuevo_producto = producto.map(precio => nuevoPrecio);
+  return nuevo_producto; No se puede mapear objetos, solo arreglos */
+  return {...producto, precio: nuevoPrecio}; //Se usa spread y se pisa el valor
 }
 
 /**
@@ -199,7 +207,7 @@ export function aplicarDescuentoRegistros(
  * Ejemplo: soloMayusculas(["hola", "mundo"]) → ["HOLA", "MUNDO"]
  */
 export function soloMayusculas(nombres: string[]): string[] {
-  throw new Error("No implementado");
+  return nombres.map((nombre) => nombre.toUpperCase())
 }
 
 /**

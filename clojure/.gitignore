@@ -1,0 +1,34 @@
+# Build artifacts
+/target/
+/classes/
+/checkouts/
+/pom.xml
+/pom.xml.asc
+*.class
+*.jar
+*.war
+*.ear
+
+# Leiningen / Clojure REPL
+.lein-failures
+.lein-repl-history
+.nrepl-port
+.cpcache/
+.rebel_readline_history
+
+# Tooling caches
+.clj-kondo/.cache/
+.lsp/
+
+# Editor/OS files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs and local env
+*.log
+.env
+.env.*
+!.env.example
