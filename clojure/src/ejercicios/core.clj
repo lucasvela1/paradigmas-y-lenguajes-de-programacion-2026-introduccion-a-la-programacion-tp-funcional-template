@@ -177,7 +177,9 @@
    (aplicar-n-veces #(* % 2) 4 1)   => 16 ;; 1→2→4→8→16
    (aplicar-n-veces inc 0 42)       => 42 ;; 0 veces, retorna x"
   [f n x]
-  (throw (ex-info "No implementado" {:fn "aplicar-n-veces"})))
+  (if (zero? n) ;;No se usa == en el if de clojure,se usa zero?
+     x ;;al llegar al último elemento lo devuelvo
+    (aplicar-n-veces f (dec n) (f x))))
 
 (defn contar-con
   "CLJ-16: Cuenta cuántos elementos de coll satisfacen pred.
@@ -186,7 +188,11 @@
    (contar-con pos? [-1 -2 -3])     => 0
    (contar-con any? [])             => 0"
   [pred coll]
-  (throw (ex-info "No implementado" {:fn "contar-con"})))
+  (if (empty? coll)
+    0
+    (if (pred (first coll)) 
+      (inc  (contar-con pred (rest coll )))
+      (contar-con pred (rest coll)))))
 
 ;; ─── GRUPO 4: Recursión ──────────────────────────────────────────
 
