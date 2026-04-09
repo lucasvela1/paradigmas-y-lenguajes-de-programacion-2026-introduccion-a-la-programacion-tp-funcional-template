@@ -155,7 +155,7 @@
    (mi-filter even? [])          => ()"
   [pred coll]
   (if (empty? coll)
-    ()
+    () ;;Lo correcto sería con apostrofes para que sea lista vacía
     (if (pred (first coll)) 
       (cons (first coll) (mi-filter pred (rest coll)))
       (mi-filter pred (rest coll)))))
@@ -168,7 +168,8 @@
    ((componer inc #(* % 2)) 3) => 7  ;; doble(3)=6, luego inc(6)=7
    ((componer str inc) 5)      => \"6\""
   [f g]
-  (throw (ex-info "No implementado" {:fn "componer"})))
+  (fn [x]
+    (f (g x))))
 
 (defn aplicar-n-veces
   "CLJ-15: Aplica f exactamente n veces sobre x usando recursión.
@@ -177,9 +178,9 @@
    (aplicar-n-veces #(* % 2) 4 1)   => 16 ;; 1→2→4→8→16
    (aplicar-n-veces inc 0 42)       => 42 ;; 0 veces, retorna x"
   [f n x]
-  (if (zero? n) ;;No se usa == en el if de clojure,se usa zero?
-     x ;;al llegar al último elemento lo devuelvo
-    (aplicar-n-veces f (dec n) (f x))))
+  (if (<= n 0)   ;;No se usa == en el if de clojure,se usa zero?, pongo menor igual porque si pasan un negativo fallaría
+    x ;;al llegar al último elemento lo devuelvo
+    (aplicar-n-veces f (dec n) (f x)))) ;;Si pusiera recur en vez del nombre de la funcion haría lo mismo
 
 (defn contar-con
   "CLJ-16: Cuenta cuántos elementos de coll satisfacen pred.
