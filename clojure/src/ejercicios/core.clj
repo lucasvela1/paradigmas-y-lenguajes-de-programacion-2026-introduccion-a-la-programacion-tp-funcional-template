@@ -206,7 +206,9 @@
    (factorial 5) => 120
    (factorial 10) => 3628800"
   [n]
-  (throw (ex-info "No implementado" {:fn "factorial"})))
+  (if (<= n 0)
+    1
+    (* n (factorial (dec n)))))
 
 (defn fibonacci-clj
   "CLJ-18: Fibonacci recursivo.
