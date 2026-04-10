@@ -219,7 +219,10 @@
    (fibonacci-clj 10) => 55
    (fibonacci-clj 15) => 610"
   [n]
-  (throw (ex-info "No implementado" {:fn "fibonacci-clj"})))
+  (cond
+    (<= n 0) 0
+    (= n 1) 1
+    :else (+ (fibonacci-clj (dec n)) (fibonacci-clj (- n 2)))))
 
 (defn aplanar-profundo
   "CLJ-19: Aplana una estructura anidada arbitrariamente profunda con recursión.
@@ -229,7 +232,9 @@
    (aplanar-profundo [[1 2] [3 [4 [5]]]]) => (1 2 3 4 5)
    (aplanar-profundo [])                  => ()"
   [coll]
-  (throw (ex-info "No implementado" {:fn "aplanar-profundo"})))
+  (if (coll? coll)
+    (mapcat aplanar-profundo coll)
+    (list coll)))
 
 (defn potencia
   "CLJ-20: Eleva base a exp (entero no negativo) con recursión.
@@ -241,7 +246,9 @@
    (potencia 3 3)   => 27
    (potencia 5 0)   => 1"
   [base exp]
-  (throw (ex-info "No implementado" {:fn "potencia"})))
+  (if (= exp 0)
+    1
+    (* (potencia base (dec exp)) base )))
 
 ;; ─── GRUPO 5: Colecciones y mapas ────────────────────────────────
 
