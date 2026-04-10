@@ -145,4 +145,4 @@ jobs:
           CLJ_G4_RESULTS: "${{ steps.clj-g4.outputs.result }}"
           CLJ_G5_RESULTS: "${{ steps.clj-g5.outputs.result }}"
         with:
-          runners: ts-g1,ts-g2,ts-g3,ts-g4,ts-g5,clj-g1,clj-g2,clj-g3,clj-g4,clj-g5
+          runners: "ts-g1,ts-g2,ts-g3,ts-g4,ts-g5,clj-g1,clj-g2,clj-g3,clj-g4,clj-g5"
