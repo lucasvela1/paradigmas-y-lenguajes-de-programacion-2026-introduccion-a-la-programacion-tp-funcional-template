@@ -260,7 +260,10 @@
    (frecuencias-manual [:a :b :a]) => {:a 2, :b 1}
    (frecuencias-manual [])         => {}"
   [coll]
-  (throw (ex-info "No implementado" {:fn "frecuencias-manual"})))
+  (reduce (fn [acc x]
+            (update acc x (fnil inc 0)))
+          {}
+          coll))
 
 (defn agrupar-por-tipo
   "CLJ-22: Agrupa vector de mapas {:nombre :tipo} por valor de :tipo.
