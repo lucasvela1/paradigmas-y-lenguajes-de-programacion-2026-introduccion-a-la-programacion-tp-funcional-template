@@ -178,7 +178,7 @@ export function actualizarPrecio(
  *          El array original NO debe cambiar.
  */
 export function ordenarSinMutar(nums: readonly number[]): number[] {
-  throw new Error("No implementado");
+    return [...nums].sort((a, b) => a - b); //hago un spread creando un nuevo arreglo y lo ordeno
 }
 
 /**
@@ -195,7 +195,10 @@ export function aplicarDescuentoRegistros(
   productos: readonly { nombre: string; precio: number }[],
   porcentaje: number
 ): { nombre: string; precio: number }[] {
-  throw new Error("No implementado");
+  return productos.map((producto) => ({ //mapeo el arreglo aplicnadole el nuevo precio con descuento
+    ...producto,
+    precio: Math.round(producto.precio * (1 - porcentaje / 100) * 100) / 100,
+  }));
 }
 
 // ─── GRUPO 3: map / filter / reduce ───────────────────────────────────────
@@ -222,7 +225,7 @@ export function productosBaratos(
   productos: { nombre: string; precio: number }[],
   precioMax: number
 ): { nombre: string; precio: number }[] {
-  throw new Error("No implementado");
+  return productos.filter((producto) => producto.precio <= precioMax) ;
 }
 
 /**
@@ -233,7 +236,7 @@ export function productosBaratos(
  * Ejemplo: sumaTotal([1,2,3,4,5]) === 15
  */
 export function sumaTotal(nums: number[]): number {
-  throw new Error("No implementado");
+  return nums.reduce((acumulador, nums) =>acumulador+ nums, 0);
 }
 
 /**
@@ -245,7 +248,15 @@ export function sumaTotal(nums: number[]): number {
  *          contarPalabras("") → {}
  */
 export function contarPalabras(texto: string): Record<string, number> {
-  throw new Error("No implementado");
+  return texto.split(" ").reduce((acc, palabra) => {
+    if (palabra === "") {
+      return acc;
+    }
+    return {
+      ...acc,
+      [palabra]: (acc[palabra] ?? 0) + 1,
+    };
+  }, {} as Record<string, number>);
 }
 
 /**
@@ -259,8 +270,11 @@ export function contarPalabras(texto: string): Record<string, number> {
  *          sumaFiltradosAlCuadrado([1,2,3], 10) === 0  (ninguno supera umbral)
  */
 export function sumaFiltradosAlCuadrado(nums: number[], umbral: number): number {
-  throw new Error("No implementado");
-}
+  return nums
+    .filter((n) => n > umbral)
+    .map((n) => n * n)
+    .reduce((acc, n) => acc + n, 0);
+} //pipeline en ts se hace a lo que queres hacerle y luego . cada funcion
 
 /**
  * TS-16: Promedio de notas de estudiantes aprobados (nota >= 6).
@@ -271,11 +285,17 @@ export function sumaFiltradosAlCuadrado(nums: number[], umbral: number): number 
  *   promedioAprobados([{nombre:"Ana",nota:8},{nombre:"Beto",nota:4},{nombre:"Carla",nota:6}])
  *   === (8+6)/2 === 7
  */
+
 export function promedioAprobados(
   estudiantes: { nombre: string; nota: number }[]
 ): number {
-  throw new Error("No implementado");
+  const aprobados = estudiantes.filter((estudiante) => estudiante.nota >= 6); //creo la constante a filtrada
+  return aprobados.length === 0
+    ? 0
+    : aprobados.reduce((acc, estudiante) => acc + estudiante.nota, 0) /
+        aprobados.length; //aplico el reduce entero y luego aplico la division de aprobados
 }
+
 
 /**
  * TS-17: Aplana un array de arrays en un solo array usando flatMap.
@@ -283,7 +303,7 @@ export function promedioAprobados(
  * SIN loops. SIN reduce manual de aplanamiento.
  */
 export function aplanarLista<T>(listas: T[][]): T[] {
-  throw new Error("No implementado");
+  return listas.flatMap((lista)=> lista );//le paso una lista devuelve una lista
 }
 
 /**
@@ -301,7 +321,10 @@ export function aplanarLista<T>(listas: T[][]): T[] {
 export function totalVentasCredito(
   transacciones: { monto: number; tipo: "credito" | "debito" }[]
 ): number {
-  throw new Error("No implementado");
+  const creditos = transacciones.filter((transaccion) => transaccion.tipo === "credito");
+  return creditos
+    .filter((credito) => credito.monto > 100)
+    .reduce((acc , credito) => credito.monto+acc , 0);
 }
 
 // ─── GRUPO 4: Composición y HOF ────────────────────────────────────────────
