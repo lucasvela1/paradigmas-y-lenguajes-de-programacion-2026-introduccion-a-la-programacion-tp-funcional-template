@@ -145,8 +145,4 @@ jobs:
           CLJG4_RESULTS: "${{ steps.cljg4.outputs.result }}"
           CLJG5_RESULTS: "${{ steps.cljg5.outputs.result }}"
         with:
-<<<<<<< HEAD
-          runners: "ts-g1,ts-g2,ts-g3,ts-g4,ts-g5,clj-g1,clj-g2,clj-g3,clj-g4,clj-g5"
-=======
           runners: 'tsg1,tsg2,tsg3,tsg4,tsg5,cljg1,cljg2,cljg3,cljg4,cljg5' 
->>>>>>> b343258 (	modified:   .github/workflows/classroom.yml)
