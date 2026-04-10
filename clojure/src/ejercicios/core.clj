@@ -291,7 +291,7 @@
                        {:nombre \"B\" :precio 200}])
    => ({:nombre \"A\" :precio 90.0} {:nombre \"B\" :precio 180.0})"
   [productos]
-  (throw (ex-info "No implementado" {:fn "aplicar-descuento"})))
+  (map #(assoc % :precio (* (:precio %) 0.9)) productos))
 
 (defn zip-listas
   "CLJ-24: Combina dos listas en pares usando map.
@@ -301,7 +301,7 @@
    (zip-listas [1 2 3] [:a :b :c]) => ([1 :a] [2 :b] [3 :c])
    (zip-listas [] [])              => ()"
   [lista1 lista2]
-  (throw (ex-info "No implementado" {:fn "zip-listas"})))
+  (map vector lista1 lista2))
 
 (defn pipeline-estudiantes
   "CLJ-25: Pipeline funcional completo.
@@ -318,4 +318,8 @@
 
    (pipeline-estudiantes [{:nombre \"Beto\" :nota 3}]) => []"
   [estudiantes]
-  (throw (ex-info "No implementado" {:fn "pipeline-estudiantes"})))
+  (->> estudiantes
+       (filter #(>= (:nota %) 6)) ;;filtrar aquellos mayores o iguales a 6
+       (sort-by :nota >) ;;ordenar por que cosa, y su condicion, de mayor a menor
+       (map :nombre) ;;mapeamos por nombre
+       (vec))) ;;vectorizar. se puede mapear y vectorizar a la vez con mapv
