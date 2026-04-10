@@ -39,7 +39,7 @@ jobs:
       # ══ TYPESCRIPT ══════════════════════════════════════════════════════════
 
       - name: TS-G1 — Funciones Puras
-        id: ts-g1
+        id: tsg1
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: 'TS-G1 Funciones Puras (TS-01 a TS-05)'
@@ -48,7 +48,7 @@ jobs:
           max-score: 10
 
       - name: TS-G2 — Inmutabilidad
-        id: ts-g2
+        id: tsg2
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: 'TS-G2 Inmutabilidad (TS-06 a TS-10)'
@@ -57,7 +57,7 @@ jobs:
           max-score: 10
 
       - name: TS-G3 — map / filter / reduce
-        id: ts-g3
+        id: tsg3
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: 'TS-G3 map/filter/reduce (TS-11 a TS-18)'
@@ -66,7 +66,7 @@ jobs:
           max-score: 16
 
       - name: TS-G4 — Composicion y HOF
-        id: ts-g4
+        id: tsg4
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: 'TS-G4 Composicion y HOF (TS-19 a TS-22)'
@@ -75,7 +75,7 @@ jobs:
           max-score: 8
 
       - name: TS-G5 — Contraste Imperativo vs Funcional
-        id: ts-g5
+        id: tsg5
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: 'TS-G5 Contraste Imperativo vs Funcional (TS-23 a TS-25)'
@@ -86,7 +86,7 @@ jobs:
       # ══ CLOJURE ═════════════════════════════════════════════════════════════
 
       - name: CLJ-G1 — Funciones basicas y listas
-        id: clj-g1
+        id: cljg1
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: 'CLJ-G1 Funciones basicas (CLJ-01 a CLJ-05)'
@@ -95,7 +95,7 @@ jobs:
           max-score: 10
 
       - name: CLJ-G2 — map / filter / reduce en Clojure
-        id: clj-g2
+        id: cljg2
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: 'CLJ-G2 map/filter/reduce (CLJ-06 a CLJ-11)'
@@ -104,7 +104,7 @@ jobs:
           max-score: 12
 
       - name: CLJ-G3 — Funciones de Orden Superior
-        id: clj-g3
+        id: cljg3
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: 'CLJ-G3 HOF (CLJ-12 a CLJ-16)'
@@ -113,7 +113,7 @@ jobs:
           max-score: 10
 
       - name: CLJ-G4 — Recursion
-        id: clj-g4
+        id: cljg4
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: 'CLJ-G4 Recursion (CLJ-17 a CLJ-20)'
@@ -122,7 +122,7 @@ jobs:
           max-score: 8
 
       - name: CLJ-G5 — Colecciones y mapas
-        id: clj-g5
+        id: cljg5
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: 'CLJ-G5 Colecciones (CLJ-21 a CLJ-25)'
@@ -134,15 +134,19 @@ jobs:
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
         env:
-          TS_G1_RESULTS: "${{ steps.ts-g1.outputs.result }}"
-          TS_G2_RESULTS: "${{ steps.ts-g2.outputs.result }}"
-          TS_G3_RESULTS: "${{ steps.ts-g3.outputs.result }}"
-          TS_G4_RESULTS: "${{ steps.ts-g4.outputs.result }}"
-          TS_G5_RESULTS: "${{ steps.ts-g5.outputs.result }}"
-          CLJ_G1_RESULTS: "${{ steps.clj-g1.outputs.result }}"
-          CLJ_G2_RESULTS: "${{ steps.clj-g2.outputs.result }}"
-          CLJ_G3_RESULTS: "${{ steps.clj-g3.outputs.result }}"
-          CLJ_G4_RESULTS: "${{ steps.clj-g4.outputs.result }}"
-          CLJ_G5_RESULTS: "${{ steps.clj-g5.outputs.result }}"
+          TSG1_RESULTS: "${{ steps.tsg1.outputs.result }}"
+          TSG2_RESULTS: "${{ steps.tsg2.outputs.result }}"
+          TSG3_RESULTS: "${{ steps.tsg3.outputs.result }}"
+          TSG4_RESULTS: "${{ steps.tsg4.outputs.result }}"
+          TSG5_RESULTS: "${{ steps.tsg5.outputs.result }}"
+          CLJG1_RESULTS: "${{ steps.cljg1.outputs.result }}"
+          CLJG2_RESULTS: "${{ steps.cljg2.outputs.result }}"
+          CLJG3_RESULTS: "${{ steps.cljg3.outputs.result }}"
+          CLJG4_RESULTS: "${{ steps.cljg4.outputs.result }}"
+          CLJG5_RESULTS: "${{ steps.cljg5.outputs.result }}"
         with:
+<<<<<<< HEAD
           runners: "ts-g1,ts-g2,ts-g3,ts-g4,ts-g5,clj-g1,clj-g2,clj-g3,clj-g4,clj-g5"
+=======
+          runners: 'tsg1,tsg2,tsg3,tsg4,tsg5,cljg1,cljg2,cljg3,cljg4,cljg5' 
+>>>>>>> b343258 (	modified:   .github/workflows/classroom.yml)
