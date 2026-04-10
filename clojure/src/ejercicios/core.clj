@@ -261,7 +261,7 @@
    (frecuencias-manual [])         => {}"
   [coll]
   (reduce (fn [acc x]
-            (update acc x (fnil inc 0)))
+            (update acc x (fnil inc 0)));;con fnil,si no encuentra el valor, le pone 0
           {}
           coll))
 
@@ -276,7 +276,11 @@
    => {\"X\" [{:nombre \"A\" :tipo \"X\"} {:nombre \"B\" :tipo \"X\"}],
        \"Y\" [{:nombre \"C\" :tipo \"Y\"}]}"
   [registros]
-  (throw (ex-info "No implementado" {:fn "agrupar-por-tipo"})))
+  (reduce (fn [acc registro] ;;se usa reduce porque buscamos retornar un mapa
+            (let [tipo (:tipo registro)]
+              (update acc tipo (fnil conj []) registro)))
+          {} ;;acumulador
+          registros)) ;;de donde se sacan los valores
 
 (defn aplicar-descuento
   "CLJ-23: Aplica exactamente 10% de descuento a :precio de cada mapa.
